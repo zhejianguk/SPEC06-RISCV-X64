@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 This is a test for the git -- cat.
+=======
+This is a test for the git -- tiger.
+>>>>>>> 1ac6f66 (Demo2.)
