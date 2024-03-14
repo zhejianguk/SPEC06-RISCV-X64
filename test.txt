@@ -1,1 +1,1 @@
-This is a test for the git -- dog.
+This is a test for the git -- cat.
