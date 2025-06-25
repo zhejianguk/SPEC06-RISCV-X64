@@ -22,7 +22,7 @@ if [ $pc_workload != "none" ]; then
 fi
 
 if [ $pc_workload == "none" ]; then 
-   BENCHMARKS=(400.perlbench 401.bzip2 403.gcc 429.mcf 445.gobmk 456.hmmer 458.sjeng 462.libquantum 464.h264ref 471.omnetpp 473.astar 483.xalancbmk)
+   BENCHMARKS=(403.gcc 429.mcf 445.gobmk 456.hmmer 458.sjeng 462.libquantum 464.h264ref 471.omnetpp 473.astar 483.xalancbmk)
    # BENCHMARKS=(blackscholes bodytrack swaptions x264)
 fi
 
@@ -47,7 +47,7 @@ for b in ${BENCHMARKS[@]}; do
    count=0
    for input in "${commands[@]}"; do
       if [[ ${input:0:1} != '#' ]]; then # allow us to comment out lines in the cmd files
-         cmd="${TARGET_RUN}${SHORT_EXE} ${input} > ${base_dir}/output/${SHORT_EXE}.${count}.out"
+         cmd="${TARGET_RUN}${SHORT_EXE} ${input}"
          echo "workload=[${cmd}]"
          eval ${cmd}
          ((count++))
