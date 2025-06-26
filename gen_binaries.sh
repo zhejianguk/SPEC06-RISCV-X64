@@ -1,6 +1,9 @@
 #!/bin/bash
 #set -e
 
+# Configure AddressSanitizer to not abort on errors and continue execution
+export ASAN_OPTIONS="abort_on_error=0:halt_on_error=0:exitcode=0:detect_leaks=1:log_path=./asan_log"
+
 #############
 # TODO
 #  * allow the user to input their desired input set

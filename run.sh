@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Configure AddressSanitizer to not abort on errors and continue execution
+# export ASAN_OPTIONS="abort_on_error=0:halt_on_error=0:exitcode=0:detect_leaks=1:log_path=./asan_log"
+
 gc_kernel=0
 pc_workload=none
 noc=0
@@ -22,7 +25,7 @@ if [ $pc_workload != "none" ]; then
 fi
 
 if [ $pc_workload == "none" ]; then 
-   BENCHMARKS=(403.gcc 429.mcf 445.gobmk 456.hmmer 458.sjeng 462.libquantum 464.h264ref 471.omnetpp 473.astar 483.xalancbmk)
+   BENCHMARKS=(400.perlbench 401.bzip2 403.gcc 429.mcf 445.gobmk 456.hmmer 458.sjeng 462.libquantum 464.h264ref 471.omnetpp 473.astar 483.xalancbmk)
    # BENCHMARKS=(blackscholes bodytrack swaptions x264)
 fi
 
