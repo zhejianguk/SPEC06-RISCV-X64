@@ -89,8 +89,8 @@ echo "Updating riscv.cfg with correct paths..."
 # Create a backup of the original config file
 cp "$CONFIG_FILE" "$CONFIG_FILE.backup"
 
-# Update the config file with the correct path
-sed -i "s|/home/zhe/Workspace/r-kernel_firesim/main_r.o|$GC_MAIN_PATH|g" "$CONFIG_FILE" || {
+# Update the config file with the correct path for all optimization flags
+sed -i "s|gc_main_[a-zA-Z_]*.o|gc_main_${KERNEL_TYPE}.o|g" "$CONFIG_FILE" || {
     echo "Error: Failed to update riscv.cfg"
     echo "Restoring backup..."
     mv "$CONFIG_FILE.backup" "$CONFIG_FILE"
@@ -110,7 +110,7 @@ mv initialisation_${KERNEL_TYPE}.riscv ./riscv-spec-ref/
 echo "Successfully completed all tasks:"
 echo "  - Compiled initialisation_${KERNEL_TYPE} and gc_main_${KERNEL_TYPE}"
 echo "  - Copied initialisation_${KERNEL_TYPE}.riscv to $SPEC06_DIR"
-echo "  - Updated riscv.cfg with path: $GC_MAIN_PATH"
+echo "  - Updated riscv.cfg to use kernel type: ${KERNEL_TYPE}"
 echo "  - Backup of original riscv.cfg saved as riscv.cfg.backup"
 
 echo "Current optimization flags in riscv.cfg now point to:"
