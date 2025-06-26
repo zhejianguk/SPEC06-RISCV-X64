@@ -50,7 +50,7 @@ for b in ${BENCHMARKS[@]}; do
    count=0
    for input in "${commands[@]}"; do
       if [[ ${input:0:1} != '#' ]]; then # allow us to comment out lines in the cmd files
-         cmd="${TARGET_RUN}${SHORT_EXE} ${input}"
+         cmd="time ${TARGET_RUN}${SHORT_EXE} ${input} > ${base_dir}/output/${SHORT_EXE}.${count}.out"
          echo "workload=[${cmd}]"
          eval ${cmd}
          ((count++))
