@@ -106,12 +106,28 @@ pwd
 ./gen_binaries.sh --compile --copy
 mv initialisation_${KERNEL_TYPE}.riscv ./riscv-spec-ref/
 
+# Update run.sh to include initialization line
+echo "Updating run.sh to include initialisation_${KERNEL_TYPE}.riscv..."
+RUN_SH_FILE="./riscv-spec-ref/run.sh"
+
+# Create backup of run.sh
+cp "$RUN_SH_FILE" "$RUN_SH_FILE.backup"
+
+# Add initialization line before the benchmark loop
+sed -i "/^base_dir=\$PWD$/i\\
+# Run initialization before benchmarks\\
+echo \"Running initialisation_${KERNEL_TYPE}.riscv...\"\\
+./initialisation_${KERNEL_TYPE}.riscv\\
+echo \"\"\\
+" "$RUN_SH_FILE"
 
 echo "Successfully completed all tasks:"
 echo "  - Compiled initialisation_${KERNEL_TYPE} and gc_main_${KERNEL_TYPE}"
 echo "  - Copied initialisation_${KERNEL_TYPE}.riscv to $SPEC06_DIR"
 echo "  - Updated riscv.cfg to use kernel type: ${KERNEL_TYPE}"
+echo "  - Updated run.sh to include initialisation_${KERNEL_TYPE}.riscv execution"
 echo "  - Backup of original riscv.cfg saved as riscv.cfg.backup"
+echo "  - Backup of original run.sh saved as run.sh.backup"
 
 echo "Current optimization flags in riscv.cfg now point to:"
 grep "OPTIMIZE.*=" "$CONFIG_FILE" | head -3 
